@@ -1,79 +1,87 @@
-class user{
-    constructor(name, lastname, books, pets){
-        this.name = name;
-        this.lastname = lastname;
-        this.books = books;
-        this.pets = pets;
+
+const fs = require('fs')
+
+
+const escribirArchivo = async (root, content) => {
+    try {
+        await fs.promises.writeFile(root, content, 'utf-8')
+    } catch (error) {
+        console.log("algo salió mal")
+        throw new Error(error)
     }
 }
 
-const joaquin = new user("Joaquin", "Cortez",[{name: "1984", autor: "George Orwell"}, {name: "Martín Fierro", autor: "José Hernández"}], ["gato", "perro"])
-
-// console.log(joaquin)
-
-
-function countPets(){
-
-    return joaquin.pets.length
-
+const leerArchivo = async (root) => {
+    try {
+        const data = await fs.promises.readFile(root, 'utf-8')
+        return data
+    } catch (error) {
+        console.log("algo salió mal");
+        throw new Error(error)
+    }
 }
 
-function addPet(){
+(async function () {
 
-    let newPet = ("mono");
+    try {
 
-    joaquin.pets.push(newPet)
-}
+        const objets = [
+            {
+                title: "Coca-Cola",
+                price: "200",
+                thumbnail: "dsa ",
+            },
+            {
+                title: "Doritos",
+                price: "240",
+                thumbnail: "dsa ",
+            },
+            {
+                title: "Cerveza Quilmes",
+                price: "200",
+                thumbnail: " dsa",
+            }
+        ]
 
-function filtrate(element){
-
-    return element.name +" de "+ element.autor
-
-    
-    
-     
-}
-
-function getBooks(){
-    
-
-    
-    let result = joaquin.books.map(filtrate)
-    
-    
-    
-    console.log(result)
-    
-    // const result = joaquin.books.filter(filtrate)
-    // // return joaquin.books.name +" de "+ joaquin.books.autor
-    // return result;
-}
-
-function addBook(){
-
-    let newBook = {name: "Los tres mosqueteros", autor:"Alejandro Dumas"};
-    
-    joaquin.books.push(newBook)
-}
+        await escribirArchivo("objets.txt", JSON.stringify(objets, null, 2))
+        const stringContent = await leerArchivo("objets.txt")
+        
+        const jsonContent = JSON.parse(stringContent)
 
 
-function getFullname(){
+        
+        
+        await escribirArchivo("objets.txt", JSON.stringify(jsonContent, null, 2))
+        
 
-    return joaquin.name +" "+ joaquin.lastname
+        function save (){
+            
+            jsonContent.forEach( () => {
 
-}
+                let id = 1
+                
+                if(id.value < jsonContent.lenght){
+                    
+                    jsonContent.push(id+1)
+                }else{
+                    console.log("hola")
+                }
+                
+            });
 
-countPets();
+        }
 
-getBooks();
+        save()
+        console.log(jsonContent)
+        console.log(objets)
+        
+        
+        
+    } catch (error) {
 
-getFullname();
+        throw new Error(error)
+    }
 
-addPet();
+})()
 
-addBook();
-
-
-console.log(countPets())
-console.log(getFullname())
 
