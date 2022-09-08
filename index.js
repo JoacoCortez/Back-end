@@ -1,87 +1,259 @@
+const fs = require("fs")
 
-const fs = require('fs')
 
-
-const escribirArchivo = async (root, content) => {
-    try {
-        await fs.promises.writeFile(root, content, 'utf-8')
-    } catch (error) {
-        console.log("algo salió mal")
-        throw new Error(error)
+class Container{
+    constructor(file){
+        this.file = file;
     }
-}
 
-const leerArchivo = async (root) => {
-    try {
-        const data = await fs.promises.readFile(root, 'utf-8')
-        return data
-    } catch (error) {
-        console.log("algo salió mal");
-        throw new Error(error)
+
+    async leerArchivo(file){
+    
+        try{
+            const data = await fs.readFileSync(file, "utf-8")
+            return JSON.parse(data)
+        } catch(error) {
+            throw new Error(error)
+        }
     }
-}
-
-(async function () {
-
-    try {
-
-        const objets = [
-            {
-                title: "Coca-Cola",
-                price: "200",
-                thumbnail: "dsa ",
-            },
-            {
-                title: "Doritos",
-                price: "240",
-                thumbnail: "dsa ",
-            },
-            {
-                title: "Cerveza Quilmes",
-                price: "200",
-                thumbnail: " dsa",
-            }
-        ]
-
-        await escribirArchivo("objets.txt", JSON.stringify(objets, null, 2))
-        const stringContent = await leerArchivo("objets.txt")
+    
+    
+    async escribirArchivo(root, content){
         
-        const jsonContent = JSON.parse(stringContent)
-
-
-        
-        
-        await escribirArchivo("objets.txt", JSON.stringify(jsonContent, null, 2))
-        
-
-        function save (){
+        try{
             
-            jsonContent.forEach( () => {
-
-                let id = 1
+            await fs.writeFileSync(root, JSON.stringify(content, null, 2), "utf-8")
+    
+            
+            
+        } catch(error){
+            console.log("fallo la escritura")
+            throw new Error(error)
+        }
+    }
+    
+    verifyExistense(file){
+        
+        try{
+            if(!fs.existsSync(file)){
+                console.log("el archivo no existe")
+    
+            } else{
+                return true
+            }
+        } catch(error){
+    
+            throw new Error(error)
+        }
+    }
+    
+    
+    
+    
+    
+    async save(product){
+    
+        try{
+            if( await !this.verifyExistense(this.file)){
                 
-                if(id.value < jsonContent.lenght){
+                const productsArray = [];
+
+                product["id"] = 1
+                
+                productsArray.push(product)
+                
+                await this.escribirArchivo(this.file, productsArray)
+
+                
+                console.log(`se le asignó el ID ${product["id"]} a ${product.title}`)
+                return product.id
+    
+            }else{
+                const data = await this.leerArchivo(this.file)
+                
+                if(await data.length != 0){
                     
-                    jsonContent.push(id+1)
-                }else{
-                    console.log("hola")
-                }
-                
-            });
+                    let lastId = data.length;
+                    product["id"] = lastId + 1;
 
+                    await data.push(product)
+
+                    this.escribirArchivo(this.file, data)
+                    console.log(`se agregó un nuevo producto ${product.title} con id ${product["id"]}`)
+        
+                    return product["id"];
+                
+                } else {
+                    
+                    product["id"] = 1
+                }
+            }
+            
+            
+    
+        } catch(error){
+            console.log("pasa por aca")
+            throw new Error(error)
+        }
+    }
+
+
+    async getById(id){
+
+    try{
+        const data = await this.leerArchivo(this.file)
+
+        const dataId = data.filter(item => item.id === id)
+
+        console.log(`se obtuvo el producto con el id ${id}`)
+        
+       
+        return dataId;
+
+    } catch(error){
+        throw new Error(error)
+
+       }
+        
+    }
+
+
+    async getAll(){
+
+        try{
+            const data = await this.leerArchivo(this.file)
+
+            console.log(data)
+            return data
+            
+
+        } catch(error){
+
+            throw new Error(error)
         }
 
-        save()
-        console.log(jsonContent)
-        console.log(objets)
-        
-        
-        
-    } catch (error) {
 
-        throw new Error(error)
+
     }
 
-})()
+
+    async deleteById(id){
+
+        try{
+
+            const data = await this.leerArchivo(this.file)
+
+            const dataId = data.filter(item => item.id === id)
+
+            dataId.filter(item => item.id !== id)
+
+            await this.escribirArchivo(this.file, dataId)
+
+            console.log(`se eliminó el producto con id ${id}`)
+
+        } catch(error){
+
+            throw new Error(error)
+        }
+    }
+
+
+    async deleteAll(producs){
+
+        let data = await this.leerArchivo(this.file)
+
+        data = []
+
+        await this.escribirArchivo(this.file, data)
+
+        console.log("se eliminó todo")
+    }
+
+}
+
+module.exports = Container;
+
+// const files = [
+//     {
+//         title: "dsadsa",
+//         price: 180,
+//         thumbnail: "dsadas"
+//     },{
+//         title: "dsadsa",
+//         price: 180,
+//         thumbnail: "dsadas"
+//     },{
+//         title: "dsadsa",
+//         price: 180,
+//         thumbnail: "dsadas"
+//     },{
+//         title: "dsadsa",
+//         price: 180,
+//         thumbnail: "dsadas"
+//     }   
+// ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
