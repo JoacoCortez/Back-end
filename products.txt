@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Coca-Cola",
+    "price": 200,
+    "thumbnail": "dsa ",
+    "id": 1
+  },
+  {
+    "title": "Doritos",
+    "price": 240,
+    "thumbnail": "dsa",
+    "id": 2
+  },
+  {
+    "title": "Doritos",
+    "price": 240,
+    "thumbnail": "dsa",
+    "id": 3
+  },
+  {
+    "title": "Cerveza Quilmes",
+    "price": 200,
+    "thumbnail": "dsa",
+    "id": 4
+  },
+  {
+    "title": "Cerveza Quilmes",
+    "price": 200,
+    "thumbnail": "dsa",
+    "id": 5
+  }
+]
