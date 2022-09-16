@@ -4,7 +4,7 @@ const products = new Container("./products.txt");
 const express = require("express");
 const app = express()
 
-const PORT = process.env.PORT
+const PORT = 8080
 
 const server = app.listen(PORT, () => {
 
@@ -15,22 +15,40 @@ const server = app.listen(PORT, () => {
 
 
 
-app.get( "/products", (require, response) => {
+app.get( "/products", async (req, res) => {
 
-    const items = products.getAll(products)
+    const items =  await products.getAll()
     
-    response.send(`<p> ${items} </p>`)
+    res.send(JSON.stringify(items))
 
-    console.log("hola")
+    
 })
 
 
-// app.get( "/randomProduct", (require, response) => {
 
-//     response.send(getRandom(product))
 
-//     return response;
-// })
+
+app.get( "/random", (req, res) => {
+
+    async function random(){
+        
+        data = await products.getAll()
+
+        let number = Math.floor(Math.random() * data.length)
+
+        let randomProduct = [];
+
+        newList = data.map((item, index) => index === number && randomProduct.push(item))
+        
+        console.log(randomProduct)
+        res.send(randomProduct)
+    }
+    
+    random()
+    
+    
+    
+})
 
 
 server.on("Error", () => {
@@ -62,9 +80,7 @@ const product3 = {
     thumbnail: "dsa"
 }
 
-
-
-  //   products.save(product3)
+//  products.save(product1)
 
 
 // products.getAll(products)
