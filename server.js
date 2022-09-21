@@ -4,11 +4,12 @@ const products = new Container("./products.txt");
 const express = require("express");
 const app = express()
 
-const PORT = 8080
+const PORT = process.env.NODE_PORT;
+const ENV = process.env.NODE_ENV;
 
 const server = app.listen(PORT, () => {
 
-    console.log("el servidor esta eschuchando el puerto" +server.address().port)
+    console.log("el servidor esta eschuchando el puerto" + server.address().port + `ENV: ${ENV}`)
 })
 
 
