@@ -1,54 +1,24 @@
-const Container = require("./index.js");
-const products = new Container("./products.txt");
-
 const express = require("express");
 const app = express()
+
+const userAgent = require("express-useragent")
+const path = require("path")
 
 const PORT = process.env.NODE_PORT;
 const ENV = process.env.NODE_ENV;
 
+const products = require("./Routers/Products")
+
+app.use(express.json())
+app.use("/api", products)
+app.use("/static", express.static(path.join(__dirname, "Media")))
+app.use(userAgent.express())
+
+
+
 const server = app.listen(PORT, () => {
 
-    console.log("el servidor esta eschuchando el puerto" + server.address().port + `ENV: ${ENV}`)
-})
-
-
-
-
-
-app.get( "/products", async (req, res) => {
-
-    const items =  await products.getAll()
-    
-    res.send(JSON.stringify(items))
-
-    
-})
-
-
-
-
-
-app.get( "/random", (req, res) => {
-
-    async function random(){
-        
-        data = await products.getAll()
-
-        let number = Math.floor(Math.random() * data.length)
-
-        let randomProduct = [];
-
-        newList = data.map((item, index) => index === number && randomProduct.push(item))
-        
-        console.log(randomProduct)
-        res.send(randomProduct)
-    }
-    
-    random()
-    
-    
-    
+    console.log("el servidor esta eschuchando el puerto" + server.address().port + ` ENV: ${ENV}`)
 })
 
 
@@ -56,6 +26,21 @@ server.on("Error", () => {
 
     console.log("Error")
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const product1 = {
@@ -81,7 +66,7 @@ const product3 = {
     thumbnail: "dsa"
 }
 
-//  products.save(product1)
+//products.save(product1)
 
 
 // products.getAll(products)

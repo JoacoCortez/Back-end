@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "af068f44-0619-43f7-b0ae-54931ac8fe73",
+		"name": "Routers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23359748"
+	},
+	"item": [
+		{
+			"name": "Get Products",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Products",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "305"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"131-xLscs2pYFLPEhMW+Ps4e/nTiGek\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 22 Sep 2022 16:16:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"title\": \"Coca-Cola\",\n        \"price\": 200,\n        \"thumbnail\": \"dsa \",\n        \"id\": 1\n    },\n    {\n        \"title\": \"Doritos\",\n        \"price\": 240,\n        \"thumbnail\": \"dsa\",\n        \"id\": 2\n    },\n    {\n        \"title\": \"Doritos\",\n        \"price\": 240,\n        \"thumbnail\": \"dsa\",\n        \"id\": 3\n    },\n    {\n        \"title\": \"Cerveza Quilmes\",\n        \"price\": 200,\n        \"thumbnail\": \"dsa\",\n        \"id\": 4\n    },\n    {\n        \"title\": \"Cerveza Quilmes\",\n        \"price\": 200,\n        \"thumbnail\": \"dsa\",\n        \"id\": 5\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Product",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Product",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/product3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"product3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "58"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3a-bNfZjyQC1pyCkCoGC6XZ/6kawOM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 22 Sep 2022 16:16:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"title\": \"Doritos\",\n        \"price\": 240,\n        \"thumbnail\": \"dsa\",\n        \"id\": 3\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Add Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"title\": \"Super pancho\",\r\n    \"price\": 150,\r\n    \"thumbnail\": \"urldsadas\"\r\n    \r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/product5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"product5"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete Product",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/product5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"product5"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 22 Sep 2022 16:17:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}

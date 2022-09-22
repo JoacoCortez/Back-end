@@ -42,7 +42,7 @@ class Container{
                 return true
             }
         } catch(error){
-    
+            console.log("no se verifico la existencia del archivo")
             throw new Error(error)
         }
     }
@@ -54,13 +54,16 @@ class Container{
     async save(product){
     
         try{
+            
             if( await !this.verifyExistense(this.file)){
+                
                 
                 const productsArray = [];
 
                 product["id"] = 1
                 
                 productsArray.push(product)
+                
                 
                 await this.escribirArchivo(this.file, productsArray)
 
@@ -71,7 +74,7 @@ class Container{
             }else{
                 const data = await this.leerArchivo(this.file)
                 
-                if(await data.length != 0){
+                if(await data.length !== -1){
                     
                     let lastId = data.length;
                     product["id"] = lastId + 1;
@@ -97,6 +100,33 @@ class Container{
         }
     }
 
+
+    async modify(id, content){
+
+       try{
+
+        const data = await this.leerArchivo(this.file)
+
+        let dataId = data.filter(id => data.id === id)
+
+        this.file.deleteById(dataId)
+
+        dataId = {id: id, ...content}
+        data.push(dataId)
+
+        this.escribirArchivo(this.file, data)
+
+       } catch(error){
+
+        console.log("fallo la modificacion")
+        throw new Error
+
+       }
+
+
+
+    }
+    
 
     async getById(id){
 
