@@ -7,17 +7,25 @@ const path = require("path")
 const PORT = process.env.NODE_PORT;
 const ENV = process.env.NODE_ENV;
 
-const products = require("./Routers/Products")
+const products = require("./routers/api/Products")
+const viewRoutes = require("./routers/views")
+
+app.set("views", path.join(__dirname, "views"))
+app.use("/static", express.static(path.join(__dirname, "Media")))
+app.set("view engine", "pug")
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 app.use("/api", products)
-app.use("/static", express.static(path.join(__dirname, "Media")))
+app.use("/", viewRoutes)
+
 app.use(userAgent.express())
 
 
 
 const server = app.listen(PORT, () => {
-
+    
     console.log("el servidor esta eschuchando el puerto" + server.address().port + ` ENV: ${ENV}`)
 })
 

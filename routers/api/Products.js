@@ -1,7 +1,7 @@
 const express = require ("express")
 const {Router} = express
 
-const Container = require ("../index.js")
+const Container = require ("../../db/index.js")
 const products = new Container("./products.txt");
 
 const router = Router()
@@ -19,7 +19,7 @@ router.get("/products", async (req, res) =>{
 })
 
 
-router.get("/product:id", async (req, res) => {
+router.get("/product/:id", async (req, res) => {
 
     let id = parseInt(req.params.id)
     
@@ -31,29 +31,33 @@ router.get("/product:id", async (req, res) => {
 
 router.post("/products", async (req, res) => {
 
-    let data = req
-
+    //let data = req.body
+    
+    const data = {title,price,thumbnail} = req.body
+    
     const product = await products.save(data)
     
     console.log(product)
-    res.status(201).json(product)
+    res.status(201).json(data)
+
+
 })
 
 
-router.put("/product:id", async (req, res) => {
+router.put("/product/:id", async (req, res) => {
 
-    let id = req.params.id
-    let data = req
+    let id = parseInt(req.params.id)
+    let data = {title,price,thumbnail} = req.body
     
-    products.modify(id, data)
+    const modified = await products.modify(id, data)
 
     res.status(200)
 })
 
 
-router.delete("/product:id", async (req, res) => {
+router.delete("/product/:id", async (req, res) => {
 
-    let id = req.params.id
+    let id = parseInt(req.params.id)
 
     products.deleteById(id)
 

@@ -105,7 +105,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3001/api/product",
+					"raw": "http://localhost:3001/api/product/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -113,7 +113,8 @@
 					"port": "3001",
 					"path": [
 						"api",
-						"product"
+						"product",
+						"3"
 					]
 				}
 			},
@@ -185,7 +186,12 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "\r\n{\r\n    \"title\": \"Super pancho\",\r\n    \"price\": 150,\r\n    \"thumbnail\": \"urldsadas\"\r\n    \r\n}"
+					"raw": "\r\n{\r\n    \"title\": \"Super pancho\",\r\n    \"price\": 150,\r\n    \"thumbnail\": \"urldsadas\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:3001/api/products",
@@ -197,6 +203,95 @@
 					"path": [
 						"api",
 						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Product",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"title\": \"Super pancho\",\r\n    \"price\": 150,\r\n    \"thumbnail\": \"urldsadas\"\r\n    \r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1-wd/ZbuqMwrYnhSdbyjisJhJW4ng\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 22 Sep 2022 17:51:05 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "6"
+				}
+			]
+		},
+		{
+			"name": "Modify product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/product/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"product",
+						"1"
 					]
 				}
 			},
@@ -212,7 +307,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:3001/api/product5",
+					"raw": "http://localhost:3001/api/product/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -220,7 +315,8 @@
 					"port": "3001",
 					"path": [
 						"api",
-						"product5"
+						"product",
+						"1"
 					]
 				}
 			},

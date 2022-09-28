@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+    h1= "Productos"
+
+    table 
+        tr 
+            th="ID"
+            th="Producto" 
+            th="Precio" 
+        each product in items
+            tr 
+                td=product.title
+                td=product.price 
+                td=product.id 
+                 

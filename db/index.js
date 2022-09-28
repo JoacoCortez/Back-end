@@ -1,6 +1,5 @@
 const fs = require("fs")
 
-
 class Container{
     constructor(file){
         this.file = file;
@@ -69,6 +68,7 @@ class Container{
 
                 
                 console.log(`se le asignó el ID ${product["id"]} a ${product.title}`)
+                
                 return product.id
     
             }else{
@@ -84,7 +84,7 @@ class Container{
                     this.escribirArchivo(this.file, data)
                     console.log(`se agregó un nuevo producto ${product.title} con id ${product["id"]}`)
         
-                    return product["id"];
+                    return product["id", data];
                 
                 } else {
                     
@@ -104,17 +104,20 @@ class Container{
     async modify(id, content){
 
        try{
-
-        const data = await this.leerArchivo(this.file)
-
-        let dataId = data.filter(id => data.id === id)
-
-        this.file.deleteById(dataId)
-
-        dataId = {id: id, ...content}
-        data.push(dataId)
-
-        this.escribirArchivo(this.file, data)
+           let data = await this.leerArchivo(this.file)
+           
+           let dataId = data.filter(item => item.id === id)
+           
+           
+           //this.deleteById(dataId)
+           
+           
+           data = data.filter(item => item.id !== id);
+           
+           dataId = {id: id, ...content}
+           data.push(dataId)
+           
+           this.escribirArchivo(this.file, data)
 
        } catch(error){
 
@@ -153,7 +156,7 @@ class Container{
         try{
             const data = await this.leerArchivo(this.file)
 
-            console.log(data)
+            //console.log(data)
             return data
             
 
@@ -174,9 +177,9 @@ class Container{
             const data = await this.leerArchivo(this.file)
 
             const dataId = data.filter(item => item.id === id)
-
+            
             dataId.filter(item => item.id !== id)
-
+            
             await this.escribirArchivo(this.file, dataId)
 
             console.log(`se eliminó el producto con id ${id}`)
@@ -188,7 +191,7 @@ class Container{
     }
 
 
-    async deleteAll(producs){
+    async deleteAll(products){
 
         let data = await this.leerArchivo(this.file)
 
