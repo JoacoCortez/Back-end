@@ -25,12 +25,28 @@ controller.getById = async (req, res) => {
 controller.post = async (req, res) => {
 
     //let data = req.body
+    console.log("holaaaaaaaaaaaaaaaaaaa")
     const data = {title,price,thumbnail} = req.body
     
     const product = await products.save(data)
     
     console.log(product)
-    res.status(201).json(data)
+    res.status(201).json(data) 
+}
+
+
+controller.postForm = async (req, res) =>{
+
+    console.log("------------------------------------------------")
+    const data = {title,price,thumbnail} = req.body
+    
+    
+    const product = await products.save(data)
+    
+    const items = await products.getAll(products)
+    
+    console.log(product)
+    res.render("products", {items})
 }
 
 
@@ -41,7 +57,8 @@ controller.modify = async (req, res) => {
     
     const modified = await products.modify(id, data)
 
-    res.status(200).sned(modified)
+    console.log(`Se modificó el producto ${data.title} con id ${id}`)
+    res.status(200).send(modified)
 }
 
 

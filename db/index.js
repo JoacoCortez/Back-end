@@ -10,8 +10,11 @@ class Container{
     
         try{
             const data = await fs.readFileSync(file, "utf-8")
+            
             return JSON.parse(data)
+
         } catch(error) {
+            console.log("falló la lectura")
             throw new Error(error)
         }
     }
@@ -36,7 +39,8 @@ class Container{
         try{
             if(!fs.existsSync(file)){
                 console.log("el archivo no existe")
-    
+                return false
+
             } else{
                 return true
             }

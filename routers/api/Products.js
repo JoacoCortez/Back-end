@@ -1,68 +1,26 @@
 const express = require ("express")
 const {Router} = express
 
-const Container = require ("../../db/index.js")
-const products = new Container("./products.txt");
-
+const controller = require("../../controllers/productsControllers")
 const router = Router()
 
 
+router.post("/", controller.postForm)
 
 
-
-router.get("/products", async (req, res) =>{
-
-    const items =  await products.getAll(products)
-    
-    res.status(200).json(items)
-
-})
+router.get("/products", controller.getAll)
 
 
-router.get("/product/:id", async (req, res) => {
-
-    let id = parseInt(req.params.id)
-    
-    const product = await products.getById(id)
-    
-    res.status(200).json(product)
-})
+router.get("/product/:id", controller.getById)
 
 
-router.post("/products", async (req, res) => {
-
-    //let data = req.body
-    
-    const data = {title,price,thumbnail} = req.body
-    
-    const product = await products.save(data)
-    
-    console.log(product)
-    res.status(201).json(data)
+router.post("/products", controller.post)
 
 
-})
+router.put("/product/:id", controller.modify)
 
 
-router.put("/product/:id", async (req, res) => {
-
-    let id = parseInt(req.params.id)
-    let data = {title,price,thumbnail} = req.body
-    
-    const modified = await products.modify(id, data)
-
-    res.status(200)
-})
-
-
-router.delete("/product/:id", async (req, res) => {
-
-    let id = parseInt(req.params.id)
-
-    products.deleteById(id)
-
-    res.status(200).end()
-})
+router.delete("/product/:id", controller.deleteById)
 
 
 module.exports = router

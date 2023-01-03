@@ -1,49 +1,57 @@
 const {Router} = require("express")
-
-const Container = require("../../db/index.js")
-const products = new Container("products.txt")
-
 const router = Router()
 
+const Container = require ("../../db/index")
+const products = new Container("./products.txt");
+
+const controller = require("../../controllers/productsControllers")
 
 
-router.get("/", (req, res, next) =>{
 
-    
-    
-    res.render("layout", )
-
-
-})
-
-
-router.get("/products", async (req, res, next) =>{
+router.get("/", async (req, res) =>{
 
     try{
-        const items = await products.getAll(products)
-
-        console.log(items)
-        res.render("products", items)
         
+        
+        detailUrlBase = process.env.BASE_HOST 
+    
+        res.render("form")
+
+
     }catch(error){
 
-        next(error)
+        console.log("fallo el form")
+        throw new Error
     }
+
+
 })
 
 
-router.get("/product/:id", async (req, res, next) =>{
 
-    try{
-        const id = parseInt(req.params.id)
-
-        const item = await products.getById(id)
-        res.render("product", item)
+router.get("/products", async (req, res) =>{
     
-    } catch(error){
+    const items = await products.getAll(products)
+    
+    console.log(items)
+    console.log({items})
+    
+    res.render("products", {items})
 
-        next(error)
-    }
 })
+
+
+router.get("/product/:id", async (req, res) =>{
+
+    let id = parseInt(req.params.id)
+    const itemId = await products.getById(id)
+    
+    res.render("product", itemId )
+
+})
+
+
+
+
 
 module.exports = router

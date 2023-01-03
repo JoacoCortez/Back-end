@@ -1,0 +1,15 @@
+extends layout
+
+block content 
+
+    form(action= detailUrlBase + "/api", method="post") 
+        div
+            input(type= "text" id="title-input" placeholder="Producto" name="title" required)
+            label(for="title-input")="Producto"
+        div
+            input(type= "text" id="price-input" placeholder="$" name="price" required)
+            label(for="price-input")= "$"
+        button(type="submit")="Enviar"
+    div 
+        a(href= detailUrlBase + "/products")="hola"
+        

@@ -8,9 +8,9 @@ block content
             th="ID"
             th="Producto" 
             th="Precio" 
-        each product in items
+        each item in items 
             tr 
-                td=product.title
-                td=product.price 
-                td=product.id 
-                 
+                td=item.id
+                td=item.title
+                td=item.price 
+                
