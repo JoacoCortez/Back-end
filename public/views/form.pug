@@ -2,7 +2,7 @@ extends layout
 
 block content 
 
-    form(action= detailUrlBase + "/api", method="post") 
+    form(id="productsForm") 
         div
             input(type= "text" id="title-input" placeholder="Producto" name="title" required)
             label(for="title-input")="Producto"
@@ -11,5 +11,6 @@ block content
             label(for="price-input")= "$"
         button(type="submit")="Enviar"
     div 
-        a(href= detailUrlBase + "/products")="hola"
+        include products.pug
+       
         

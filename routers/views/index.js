@@ -12,10 +12,11 @@ router.get("/", async (req, res) =>{
 
     try{
         
+        const items = await products.getAll(products)
         
         detailUrlBase = process.env.BASE_HOST 
     
-        res.render("form")
+        res.render("form", {items})
 
 
     }catch(error){

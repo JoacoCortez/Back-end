@@ -46,7 +46,7 @@ controller.postForm = async (req, res) =>{
     const items = await products.getAll(products)
     
     console.log(product)
-    res.render("products", {items})
+    res.render("form", {items})
 }
 
 
