@@ -1,15 +1,29 @@
-const Container = require ("../db/index.js")
-const products = new Container("./products.txt");
+// const Container = require ("../db/index.js")
+// const products = new Container("./products.txt");
+const DB = require("./dbController.js")
 
 const controller = {}
 
 
 controller.getAll = async (req, res) =>{
 
-    const items =  await products.getAll(products)
-    
-    res.status(200).json(items)
+    try{
+        const data =  await DB.getProducts()
+        console.log("PASAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")    
+        
+        
+        
+        
+        return data
+        //JSON.stringify(data)
+        //res.status(200).json(data)
+    } catch(err){
+        console.log("ERROR DEL CONTROLLER GET ALL ", err)
+
+    }   
 }
+
+        
 
 
 controller.getById = async (req, res) => {
@@ -41,9 +55,9 @@ controller.postForm = async (req, res) =>{
     const data = {title,price,thumbnail} = req.body
     
     
-    const product = await products.save(data)
+    const product = await DB.save(data)
     
-    const items = await products.getAll(products)
+    const items = await DB.getProducts()
     
     console.log(product)
     res.render("form", {items})

@@ -23,9 +23,12 @@
     "express": "^4.18.1",
     "express-generator": "^4.16.1",
     "express-useragent": "^1.0.15",
+    "knex": "^2.4.0",
     "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
     "nodemon": "^2.0.19",
     "pug": "^3.0.2",
-    "socket.io": "^4.5.4"
+    "socket.io": "^4.5.4",
+    "sqlite3": "^5.1.4"
   }
 }

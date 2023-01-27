@@ -1,11 +1,14 @@
 const express = require ("express")
 const {Router} = express
 
-const controller = require("../../controllers/productsControllers")
+const controller = require("../../controllers/index.js")
 const router = Router()
 
 
 router.post("/", controller.postForm)
+
+
+//router.get("/", controller.getAll)
 
 
 router.get("/products", controller.getAll)

@@ -8,14 +8,16 @@ const priceInput = document.getElementById("price-input")
 const table = document.getElementsByTagName("tbody")[0]
 
 
+
 // clientSocket.on("init", (products) =>{
     
+//     console.log(products)
 //     fetch("http://localhost:3001/views/form.pug")
 //     .then((res) => res.text())
 //     .then((res) =>{
-        
+//         console.log("PASA POR EL FETCH")
 //         console.log(res)
-        
+//         //res.render("form", {items})
         
 //     })
 

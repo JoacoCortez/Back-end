@@ -1,10 +1,10 @@
 const {Router} = require("express")
 const router = Router()
 
-const Container = require ("../../db/index")
-const products = new Container("./products.txt");
+// const Container = require ("../../db/index")
+// const products = new Container("./products.txt");
 
-const controller = require("../../controllers/productsControllers")
+const controller = require("../../controllers/index.js")
 
 
 
@@ -12,16 +12,17 @@ router.get("/", async (req, res) =>{
 
     try{
         
-        const items = await products.getAll(products)
+        const items = await controller.getAll()
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         
         detailUrlBase = process.env.BASE_HOST 
-    
+        console.log("LOS ITEMS DE LA RUTA ", items)
         res.render("form", {items})
 
 
     }catch(error){
 
-        console.log("fallo el form")
+        console.log("fallo el form", error)
         throw new Error
     }
 

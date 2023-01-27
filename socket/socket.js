@@ -1,8 +1,12 @@
 const {Server} = require("socket.io")
-const Container = require ("../db/index.js")
-const products = new Container("./products.txt");
+// const {config} = require("../db/MySQL/config")
+// const Container = require("../db/index")
+//const DB = new Container(config, "products")
+const DB = require("../controllers/dbController")
 
 let io
+
+const productsArray = DB.getProducts()
 
 
 class Socket{
@@ -15,7 +19,7 @@ class Socket{
             console.log("new client connected ID " + clientSocket.id)
             
             
-
+            
             //clientSocket.emit("init", productsArray)
 
     
@@ -55,10 +59,12 @@ class Socket{
 
 const getProducts = async (data) =>{
 
-    let newProduct = await products.save(data) 
-    let productsArray = await products.getAll(products)
+    console.log("data del getProducts", data)
+    let newProduct = await DB.addProduct(data) 
+    let productsArray = await DB.getProducts()
     
-    await productsArray.push(newProduct)
+    console.log(newProduct)
+    //await productsArray.push(newProduct)
     return productsArray
 }
 
