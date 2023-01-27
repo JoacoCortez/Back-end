@@ -42,7 +42,7 @@ server.on("Error", () => {
     console.log("Error")
 })
 
-//Para manejar versiones de terceros con npm --> ~(para parches) ^(para features) *(para todo, no recomendable)
+//Para manejar versiones de terceros con npm -->  ~(para parches) ^(para features) *(para todo, no recomendable)
 
 
 
